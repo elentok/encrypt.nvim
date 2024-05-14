@@ -3,8 +3,8 @@
 This is a simple alternative to the "X" command that was removed from Neovim.
 
 Disclaimer: It's probably not the most secure implementation (if such thing is
-even possible) but it gives the ability to edit files that will be stored in
-encrypted on the disk.
+even possible) but it gives the ability to edit files while they are stored
+in an encrypted format on the disk.
 
 ## Usage
 
@@ -21,6 +21,17 @@ Add the following to your package manager:
 
 ```lua
 { "elentok/encrypt.nvim", opts = {} },
+```
+
+## Manual decryption
+
+To decrypt a file that was encrypted using `decrypt.nvim` without the plugin
+just run:
+
+```
+cat encrypted.txt \
+  | base64 --decode \
+  | openssl enc -d -aes-256-cbc -pbkdf2 -salt -in - -out - -k {PASSWORD}
 ```
 
 ## TODO
