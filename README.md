@@ -29,10 +29,12 @@ To decrypt a file that was encrypted using `decrypt.nvim` without the plugin
 just run:
 
 ```
-cat encrypted.txt \
+tail -n +2 encrypted.txt \
   | base64 --decode \
   | openssl enc -d -aes-256-cbc -pbkdf2 -salt -in - -out - -k {PASSWORD}
 ```
+
+Or use the provided [decrypt.sh](decrypt.sh)
 
 ## TODO
 
