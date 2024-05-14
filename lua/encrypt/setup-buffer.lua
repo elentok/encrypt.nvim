@@ -5,7 +5,9 @@ local function createWriteAutoCmd()
     return
   end
 
+  local bufnr = vim.api.nvim_get_current_buf()
   vim.b["encryptionAutoCmd"] = vim.api.nvim_create_autocmd({ "BufWriteCmd" }, {
+    buffer = bufnr,
     callback = function()
       if vim.b["encrypted"] ~= true then
         return
