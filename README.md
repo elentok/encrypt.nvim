@@ -35,8 +35,3 @@ tail -n +2 encrypted.txt \
 ```
 
 Or use the provided [decrypt.sh](decrypt.sh)
-
-## TODO
-
-- [ ] Store the password in a local scope in the plugin instead of as a buffer
-      variable.
