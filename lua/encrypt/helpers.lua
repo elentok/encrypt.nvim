@@ -15,4 +15,10 @@ end
 local getPassword = getPasswordFactory()
 local ENCRYPTED_PREFIX = "# <<<encrypted>>>"
 
-return { getPassword = getPassword, ENCRYPTED_PREFIX = ENCRYPTED_PREFIX }
+---@enum buftype
+local BUFTYPE = {
+  encrypted = 1,
+  plaintext = 2,
+}
+
+return { getPassword = getPassword, ENCRYPTED_PREFIX = ENCRYPTED_PREFIX, BUFTYPE = BUFTYPE}

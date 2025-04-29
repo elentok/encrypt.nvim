@@ -20,6 +20,7 @@ local function decrypt()
   end
 
   vim.fn.timer_start(0, function()
+    vim.bo.modifiable = true
     vim.api.nvim_buf_set_lines(0, 0, -1, false, decrypted_lines)
     vim.bo.modified = false
   end)
