@@ -5,15 +5,19 @@ local helpers = require("encrypt.helpers")
 
 local function setup()
   vim.api.nvim_create_user_command("X", function()
-    setupBuffer()
-    encrypt()
+    if helpers.bufferEncrypted() then
+      setupBuffer(helpers.BUFTYPE.encrypted)
+      decrypt()
+    else
+      setupBuffer(helpers.BUFTYPE.plaintext)
+      encrypt()
+    end
   end, {})
 
   vim.api.nvim_create_autocmd({ "BufReadPost" }, {
     callback = function()
-      local first_line = vim.api.nvim_buf_get_lines(0, 0, 1, false)[1]
-      if first_line == helpers.ENCRYPTED_PREFIX then
-        setupBuffer()
+      if helpers.bufferEncrypted() then
+        setupBuffer(helpers.BUFTYPE.encrypted)
         decrypt()
       end
     end,

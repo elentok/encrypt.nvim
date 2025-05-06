@@ -1,4 +1,5 @@
 local encrypt = require("encrypt.encrypt")
+local helpers = require("encrypt.helpers")
 
 local function createWriteAutoCmd()
   if vim.b["encryptionAutoCmd"] ~= nil then
@@ -18,12 +19,18 @@ local function createWriteAutoCmd()
   })
 end
 
-local function setupBuffer()
+---@param buftype buftype
+local function setupBuffer(buftype)
   -- buftype="acwrite" means save using the BufWriteCmd command
   vim.bo.buftype = "acwrite"
   vim.bo.swapfile = false
   vim.bo.undofile = false
   vim.b["encrypted"] = true
+  -- Lock the encrypted file to read-only mode to avoid corruption
+  -- caused by unintended modifications.
+  if buftype == helpers.BUFTYPE.encrypted then
+    vim.bo.modifiable = false
+  end
   createWriteAutoCmd()
 end
 

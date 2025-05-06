@@ -8,12 +8,20 @@ in an encrypted format on the disk.
 
 ## Usage
 
+Encryption:
 1. Open a file
 2. Run `:X`
 3. Enter a password
 
 Now the file is encrypted and every time you open it you'll be asked for the
 password.
+
+Decryption:
+1. Open an encrypted file
+2. Run `:X`
+3. Enter a password
+
+Now the encrypted file is decrypted in the buffer.
 
 ## Installation
 
@@ -35,8 +43,3 @@ tail -n +2 encrypted.txt \
 ```
 
 Or use the provided [decrypt.sh](decrypt.sh)
-
-## TODO
-
-- [ ] Store the password in a local scope in the plugin instead of as a buffer
-      variable.
