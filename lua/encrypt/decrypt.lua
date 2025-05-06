@@ -5,7 +5,7 @@ local helpers = require("encrypt.helpers")
 ---@param password string
 local function decrypt_lines(lines, password)
   return vim.fn.systemlist(
-    "base64 --decode | openssl enc -d -aes-256-cbc -pbkdf2 -salt -in - -out - -k " .. password,
+    "base64 --decode | openssl enc -d -aes-256-cbc -pbkdf2 -salt -in - -out - -k " .. vim.fn.shellescape(password),
     lines
   )
 end
