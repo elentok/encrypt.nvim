@@ -12,6 +12,10 @@ end
 
 local function decrypt()
   local password = helpers.getPassword()
+  if not password then
+    vim.notify("Password can not be empty", vim.log.levels.ERROR)
+    return
+  end
   local encrypted_lines = vim.api.nvim_buf_get_lines(0, 1, -1, false)
   local decrypted_lines = decrypt_lines(encrypted_lines, password)
   if vim.v.shell_error ~= 0 then

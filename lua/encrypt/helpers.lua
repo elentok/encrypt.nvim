@@ -6,6 +6,9 @@ local getPasswordFactory = function()
     local key = string.format("%s", vim.fn.bufnr())
     if bufferPasswordMap[key] == nil then
       password = vim.fn.inputsecret("Enter password: ")
+      if password == "" then
+        vim.notify("Password is cancelled", vim.log.levels.WARN)
+      end
       bufferPasswordMap[key] = password
     end
     return bufferPasswordMap[key]
